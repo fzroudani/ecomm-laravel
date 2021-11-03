@@ -28,7 +28,9 @@
                                 <div class="col-sm-4">
                                     <a href="detail/{{$item->gallery}}">
                                         @foreach($file as $fil)
+                                            @if(Str::contains($fil,$item->gallery))
                                             <img class="detail-img" src="../storage/uploads{{$fil}}">
+                                            @endif
                                         @endforeach
                                     </a>
                                 </div>

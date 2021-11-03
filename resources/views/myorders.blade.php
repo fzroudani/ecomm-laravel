@@ -21,12 +21,18 @@
                             </div>
                         @else
                                 <div class="row searched-item cart-list-devider">
+                                    <?php
+                                    $i=0;
+                                    ?>
                                     @foreach($file as $fil)
+                                        @if(Str::contains($fil,$item->gallery) && $i<3)
+                                            <div hidden>{{$i=$i+1}}</div>
                                     <div class="col-sm-1">
                                         <a href="detail/{{$item->id}}">
                                             <img class="trending-img" src="storage/uploads{{$fil}}">
                                         </a>
                                     </div>
+                                        @endif
                                     @endforeach
                                     <div class="col-sm-4">
                                         <h5>Measure :{{$item->measure}}</h5>

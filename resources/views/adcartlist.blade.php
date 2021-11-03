@@ -41,11 +41,14 @@
 
                                     <td>{{$user->name}}</td>
                                     <td>
+                                        <?php
+                                        $i=0;
+                                        ?>
                                         @foreach($file as $fil)
-
-
+                                                @if(Str::contains($fil,$product->gallery) && $i<3)
+                                                <div hidden>{{$i=$i+1}}</div>
                                             <img class="detail-img" src="../storage/uploads{{$fil}}">
-
+                                                @endif
                                         @endforeach
                                     </td>
                                     <td>{{$product->type}}</td>

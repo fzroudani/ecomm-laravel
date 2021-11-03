@@ -16,10 +16,16 @@
                                </a>
                                @else
                                    <div class="row">
+                                       <?php
+                                       $i=0;
+                                       ?>
                                        @foreach($file as $fil)
+                                               @if(Str::contains($fil,$item->gallery) && $i<3)
+                                                   <div hidden>{{$i=$i+1}}</div>
                                            <div class="col-sm-4">
                                                    <img class="detail-img" src="../storage/uploads{{$fil}}">
                                            </div>
+                                           @endif
                                        @endforeach
                                    </div>
                                @endif

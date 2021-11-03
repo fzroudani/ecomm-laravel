@@ -14,12 +14,14 @@
                         </div>
                     @else
                         @foreach($file as $fil)
+                            @if(Str::contains($fil,$item->gallery))
                         <div class="img-box">
                             <img src="../storage/uploads{{$fil}}" width="200" alt=" pathinfo(../storage/uploads{{$fil}}, PATHINFO_FILENAME) ">
                             <p><a download="{{$fil}}" href="../storage/uploads{{$fil}}" title="../storage/uploads{{$fil}}">
                                     Download
                                 </a></p>
                         </div>
+                            @endif
                         @endforeach
                     @endif
                 @endforeach

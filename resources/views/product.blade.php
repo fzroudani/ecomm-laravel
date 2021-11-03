@@ -33,11 +33,13 @@ $i=1;
                             <a href="detail/{{$item->gallery}}">
                                 <div class="row">
                                     @foreach($file as $fil)
+                                        @if(Str::contains($fil,$item->gallery))
                                         <div class="col-sm-4">
                                             <a href="detail/{{$item->gallery}}">
                                                 <img class="slider-img" src="storage/uploads{{$fil}}">
                                             </a>
                                         </div>
+                                        @endif
                                     @endforeach
                                 </div>
                                 <div class="carousel-caption slider-text">
@@ -104,8 +106,6 @@ $i=1;
             <div class="carousel-inner">
                 @foreach($products as $item)
                     @if($item->type!='tableauTriptyque')
-
-
                     <div class="trending-item">
                         <a href="detail/{{$item->gallery}}">
 
@@ -119,13 +119,17 @@ $i=1;
                     @else
                         <div class="row ">
                             <a href="detail/{{$item->gallery}}">
+
                                 @foreach($file as $fil)
+                                    @if(Str::contains($fil,$item->gallery))
                                     <div class="col-sm-1" style="height: 50px; padding-left: 90px ;padding-right: 90px;padding-bottom: 50px; width: 20px;">
                                         <img class="trending-img" src="storage/uploads{{$fil}}">
                                     </div>
+                                    @endif
                                 @endforeach
                                     <div class="">
                                         <h3>{{$item->type}}</h3>
+
                                     </div>
                             </a>
                         </div>

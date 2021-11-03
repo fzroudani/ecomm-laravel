@@ -23,23 +23,19 @@ class ProductController extends Controller
             ->distinct()
             ->get();
         $arr = array();
+        $i = 0;
+        $arr = array();
         foreach ($products as $file) {
             if ($file->type == 'tableauTriptyque') {
                 $fil = Storage::allFiles("public/uploads/$file->type/$file->gallery");
-                $arr = array();
-                $i = 0;
                 foreach ($fil as $f) {
-
                     $arr = Arr::add($arr, $i, Str::after($f, 'public/uploads'));
                     $i++;
-
-
                 }
             }
-
         }
 
-            return view('product', ['products' => $products, 'file' => $arr]);
+            return view('product', ['products' => $products,'files'=>$fil, 'file' => $arr]);
 
     }
     function detail($gallery)
@@ -100,21 +96,20 @@ class ProductController extends Controller
             ->where('cart.user_id',$userId)
             ->select('products.*','cart.id as cart_id')
             ->get();
+        $arr = array();
+        $i = 0;
         foreach ($products as $file) {
             if ($file->type == 'tableauTriptyque') {
                 $fil = Storage::allFiles("public/uploads/$file->type/$file->gallery");
-                $arr = array();
-                $i = 0;
                 foreach ($fil as $f) {
-
                     $arr = Arr::add($arr, $i, Str::after($f, 'public/uploads'));
                     $i++;
                 }
-                return view('cartlist',['products'=>$products,'file'=>$arr]);
+
             }
         }
 
-        return view('cartlist',['products'=>$products]);
+        return view('cartlist',['products'=>$products,'file'=>$arr]);
 
     }
     function removeCart($id)
@@ -129,22 +124,22 @@ class ProductController extends Controller
             ->where('cart.user_id',$userId)
             ->select('products.*','cart.id as cart_id')
             ->get();
-
+        $arr = array();
+        $i = 0;
         foreach ($products as $file) {
             if ($file->type == 'tableauTriptyque') {
                 $fil = Storage::allFiles("public/uploads/$file->type/$file->gallery");
-                $arr = array();
-                $i = 0;
+
                 foreach ($fil as $f) {
 
                     $arr = Arr::add($arr, $i, Str::after($f, 'public/uploads'));
                     $i++;
                 }
-                return view('ordernow',['products'=>$products,'file'=>$arr]);
+
             }
         }
 
-        return view('ordernow',['products'=>$products]);
+        return view('ordernow',['products'=>$products,'file'=>$arr]);
     }
     function orderPlace(Request $req)
     {
@@ -169,20 +164,20 @@ class ProductController extends Controller
             ->join('products','orders.product_id','=','products.id')
             ->where('orders.user_id',$userId)
             ->get();
+        $arr = array();
+        $i = 0;
         foreach ($orders as $file) {
             if ($file->type == 'tableauTriptyque') {
                 $fil = Storage::allFiles("public/uploads/$file->type/$file->gallery");
-                $arr = array();
-                $i = 0;
                 foreach ($fil as $f) {
 
                     $arr = Arr::add($arr, $i, Str::after($f, 'public/uploads'));
                     $i++;
                 }
-                return view('myorders',['orders'=>$orders,'file'=>$arr]);
+
             }
         }
-        return view('myorders',['orders'=>$orders]);
+        return view('myorders',['orders'=>$orders,'file'=>$arr]);
     }
     function adminHome(){
         return view('AdminHome');
@@ -196,21 +191,22 @@ class ProductController extends Controller
             ->join('users','cart.user_id','=',"cart.user_id")
             ->select('users.*','cart.id as cart_id')
             ->get();
+        $arr = array();
+        $i = 0;
         foreach ($products as $file) {
             if ($file->type == 'tableauTriptyque') {
                 $fil = Storage::allFiles("public/uploads/$file->type/$file->gallery");
-                $arr = array();
-                $i = 0;
+
                 foreach ($fil as $f) {
 
                     $arr = Arr::add($arr, $i, Str::after($f, 'public/uploads'));
                     $i++;
                 }
-                return view('adcartlist',['users'=>$users,'products'=>$products,'file'=>$arr]);
+
             }
         }
 
-        return view('adcartlist',['users'=>$users,'products'=>$products]);
+        return view('adcartlist',['users'=>$users,'products'=>$products,'file'=>$arr]);
     }
     function adOrderList()
     {
@@ -222,23 +218,23 @@ class ProductController extends Controller
             ->join('users','orders.user_id','=',"orders.user_id")
             ->select('users.*','orders.id as order_id')
             ->get();
+        $arr = array();
+        $i = 0;
         foreach ($products as $file) {
             if ($file->type == 'tableauTriptyque') {
                 $fil = Storage::allFiles("public/uploads/$file->type/$file->gallery");
-                $arr = array();
-                $i = 0;
                 foreach ($fil as $f) {
 
                     $arr = Arr::add($arr, $i, Str::after($f, 'public/uploads'));
                     $i++;
                 }
-                return view('adorderlist',['users'=>$users,'products'=>$products,'file'=>$arr]);
+
             }
         }
 
 
 
-        return view('adorderlist',['users'=>$users,'products'=>$products]);
+        return view('adorderlist',['users'=>$users,'products'=>$products,'file'=>$arr]);
     }
     function adProductList()
     {
@@ -246,20 +242,20 @@ class ProductController extends Controller
             ->select('products.type','products.gallery','products.file_path')
             ->distinct()
             ->get();
+        $arr = array();
+        $i = 0;
         foreach ($products as $file) {
             if ($file->type == 'tableauTriptyque') {
                 $fil = Storage::allFiles("public/uploads/$file->type/$file->gallery");
-                $arr = array();
-                $i = 0;
+
                 foreach ($fil as $f) {
 
                     $arr = Arr::add($arr, $i, Str::after($f, 'public/uploads'));
                     $i++;
                 }
-                return view('adproductlist',['products'=>$products,'file'=>$arr]);
             }
         }
-        return view('adproductlist',['products'=>$products]);
+        return view('adproductlist',['products'=>$products,'file'=>$arr]);
     }
     function removeProduct($gallery)
     {
